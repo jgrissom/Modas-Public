@@ -1,13 +1,25 @@
-﻿<!DOCTYPE html>
+﻿@using Modas.Models
+@model IEnumerable<Event>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Hello</title>
+    <title>MODAS</title>
     <link href="~/css/all.min.css" rel="stylesheet" />
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    World!
+    <table class="container table table-bordered">
+        <tr><th>Date</th><th>Time</th><th>Location</th></tr>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
+                <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
+                <td>@e.Location.Name</td>
+            </tr>
+        }
+    </table>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
