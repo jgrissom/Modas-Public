@@ -12,6 +12,7 @@
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\webfonts\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
