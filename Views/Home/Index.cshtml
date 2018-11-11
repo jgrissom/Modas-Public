@@ -10,13 +10,13 @@
 </head>
 <body>
     <table class="container table table-bordered">
-        <tr><th>Date</th><th>Time</th><!--<th>Location</th>--></tr>
+        <tr><th>Date</th><th>Time</th><th>Location</th></tr>
         @foreach (var e in Model)
         {
         <tr>
             <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
             <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
-            @*<td>@e.Location.Name</td>*@
+            <td>@e.Location.Name</td>
         </tr>
         }
     </table>
