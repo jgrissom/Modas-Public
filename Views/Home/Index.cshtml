@@ -1,5 +1,6 @@
 ﻿@using Modas.Models
-@model IEnumerable<Event>
+@using Modas.Models.ViewModels
+@model EventListViewModel
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +12,13 @@
 <body>
     <table class="container table table-bordered">
         <tr><th>Date</th><th>Time</th><th>Location</th></tr>
-        @foreach (var e in Model)
+        @foreach (var e in Model.Events)
         {
-        <tr>
-            <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
-            <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
-            <td>@e.Location.Name</td>
-        </tr>
+            <tr>
+                <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
+                <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
+                <td>@e.Location.Name</td>
+            </tr>
         }
     </table>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
