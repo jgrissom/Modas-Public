@@ -30,8 +30,8 @@
         </table>
         <div class="row mb-3">
             <div class="col">
-                <button id="first" class="btn btn-outline-secondary" type="button"><i class="fas fa-angle-double-left"></i><span class="d-none d-md-inline"> First</span></button>
-                <button id="prev" class="btn btn-outline-secondary" type="button"><i class="fas fa-angle-left"></i><span class="d-none d-md-inline"> Prev</span></button>
+                <button disabled id="first" class="btn btn-outline-secondary" type="button" data-page="1"><i class="fas fa-angle-double-left"></i><span class="d-none d-md-inline"> First</span></button>
+                <button disabled id="prev" class="btn btn-outline-secondary" type="button" data-page="@(Model.PagingInfo.PreviousPage)"><i class="fas fa-angle-left"></i><span class="d-none d-md-inline"> Prev</span></button>
             </div>
             <div class="col text-center text-secondary">
                 <span id="start">@(Model.PagingInfo.RangeStart)</span>-<span id="end">@(Model.PagingInfo.RangeEnd)</span>
@@ -39,8 +39,8 @@
                 <span id="total">@(Model.PagingInfo.TotalItems)</span>
             </div>
             <div class="col text-right">
-                <button id="next" class="btn btn-outline-secondary" type="button"><span class="d-none d-md-inline">Next </span><i class="fas fa-angle-right"></i></button>
-                <button id="last" class="btn btn-outline-secondary"><span class="d-none d-md-inline">Last </span><i class="fas fa-angle-double-right"></i></button>
+                <button disabled id="next" class="btn btn-outline-secondary" type="button" data-page="@(Model.PagingInfo.NextPage)"><span class="d-none d-md-inline">Next </span><i class="fas fa-angle-right"></i></button>
+                <button disabled id="last" class="btn btn-outline-secondary" data-page="@(Model.PagingInfo.TotalPages)"><span class="d-none d-md-inline">Last </span><i class="fas fa-angle-double-right"></i></button>
             </div>
         </div>
     </div>
@@ -48,5 +48,22 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
     <script src="~/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            initButtons();
+
+            // event listeners for first/next/prev/last buttons
+            $('#next, #prev, #first, #last').on('click', function () {
+                location.href = "page" + $(this).data('page');
+            });
+
+            function initButtons() {
+                // disable prev/first buttons when on first page
+                $('#first, #prev').prop('disabled', $('#start').html() == "1");
+                // disable next/last buttons when on last page
+                $('#last, #next').prop('disabled', $('#end').html() == $('#total').html());
+            }
+        });
+    </script>
 </body>
 </html>
