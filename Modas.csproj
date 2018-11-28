@@ -98,4 +98,7 @@
     <None Include="wwwroot\js\bootstrap.min.js" />
     <None Include="wwwroot\js\bootstrap.min.js.map" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\FakeEventRepository.cs" />
+  </ItemGroup>
 </Project>

@@ -13,5 +13,12 @@ namespace Modas.Models
 
         public IQueryable<Event> Events => context.Events;
         public IQueryable<Location> Locations => context.Locations;
+
+        public Event AddEvent(Event evt)
+        {
+            context.Add(evt);
+            context.SaveChanges();
+            return evt;
+        }
     }
 }

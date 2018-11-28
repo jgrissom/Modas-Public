@@ -22,5 +22,14 @@ namespace Modas.Controllers
         public Event Get(int id) => repository.Events
             .Include(e => e.Location)
             .FirstOrDefault(e => e.EventId == id);
+
+        [HttpPost]
+        // add event
+        public Event Post([FromBody] Event evt) => repository.AddEvent(new Event
+        {
+            TimeStamp = evt.TimeStamp,
+            Flagged = evt.Flagged,
+            LocationId = evt.LocationId
+        });
     }
 }
