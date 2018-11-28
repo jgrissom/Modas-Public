@@ -15,12 +15,15 @@
     <div class="container">
         <table class="table table-sm table-striped table-shadow">
             <thead class="bg-success text-white">
-                <tr><th>Date</th><th>Time</th><th>Location</th></tr>
+                <tr><th class="text-center">Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
             </thead>
             <tbody>
                 @foreach (var e in Model.Events)
                 {
                     <tr>
+                        <td class="text-center">
+                            <i data-id="@e.EventId" data-checked="@e.Flagged.ToString().ToLower()" class="@(e.Flagged ? "fas" : "far") fa-flag fa-lg flag"></i>
+                        </td>
                         <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
                         <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
                         <td>@e.Location.Name</td>
@@ -51,6 +54,17 @@
     <script>
         $(function () {
             initButtons();
+
+            $('.flag').on('click', function () {
+                // TODO: AJAX to update database
+                if ($(this).data('checked')) {
+                    $(this).data('checked', false);
+                    $(this).removeClass('fas').addClass('far');
+                } else {
+                    $(this).data('checked', true);
+                    $(this).removeClass('far').addClass('fas');
+                }
+            });
 
             // event listeners for first/next/prev/last buttons
             $('#next, #prev, #first, #last').on('click', function () {
