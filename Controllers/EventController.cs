@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Modas.Models;
@@ -15,5 +16,11 @@ namespace Modas.Controllers
         // returns all events (unsorted)
         public IEnumerable<Event> Get() => repository.Events
             .Include(e => e.Location);
+
+        [HttpGet("{id}")]
+        // return specific event
+        public Event Get(int id) => repository.Events
+            .Include(e => e.Location)
+            .FirstOrDefault(e => e.EventId == id);
     }
 }
