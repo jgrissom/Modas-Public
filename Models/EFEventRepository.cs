@@ -20,5 +20,15 @@ namespace Modas.Models
             context.SaveChanges();
             return evt;
         }
+
+        public Event UpdateEvent(Event evt)
+        {
+            Event Event = context.Events.FirstOrDefault(e => e.EventId == evt.EventId);
+            Event.TimeStamp = evt.TimeStamp;
+            Event.Flagged = evt.Flagged;
+            Event.LocationId = evt.LocationId;
+            context.SaveChanges();
+            return Event;
+        }
     }
 }
