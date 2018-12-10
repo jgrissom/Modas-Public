@@ -31,8 +31,8 @@ $(function () {
             html += "<td class=\"text-center\">";
             html += "<i data-id=\"" + e[i].id + "\" data-checked=\"" + e[i].flag + "\" class=\"" + f + " fa-flag fa-lg flag\" />";
             html += "</td>";
-            html += "<td>" + e[i].ts.split("T")[0] + "</td>";
-            html += "<td>" + e[i].ts.split("T")[1] + "</td>";
+            html += "<td>" + get_long_date(e[i].ts) + "</td>";
+            html += "<td>" + get_time(e[i].ts) + "</td>";
             html += "<td>" + e[i].loc + "</td>";
             html += "</tr> ";
         }
@@ -55,4 +55,29 @@ $(function () {
         // disable next/last buttons when on last page
         $('#last, #next').prop('disabled', $('#end').html() == $('#total').html());
     }
+
+    function get_long_date(str){
+        var month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var dow = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        var full_date = str.split("T")[0];
+        var year = full_date.split("-")[0];
+        var month = full_date.split("-")[1];
+        var date = full_date.split("-")[2];
+        var d = new Date(year + "-" + Number(month) + "-" + Number(date))
+                    
+        return dow[d.getDay()] + ", " + month_names[d.getMonth()] + " " + date + ", " + year;
+    }
+    function get_short_date(str){
+        return str.split("T")[0];
+    }
+    function get_time(str){
+        var time = str.split("T")[1];
+        var hours = Number(time.split(":")[0]);
+        var am_pm = hours >= 12 ? " PM" : " AM";
+        hours = hours > 12 ? hours - 12 : hours;
+        hours == 0 ? hours = "12" : hours;
+        hours = hours < 10 ? "0" + hours : hours + "";
+        var minutes = time.split(":")[1];
+        return hours + ":" + minutes + am_pm;
+    }   
 });
