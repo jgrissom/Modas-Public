@@ -11,6 +11,33 @@
 </head>
 <body>
 
+    <div class="container">
+        <table class="table table-sm table-striped table-shadow">
+            <thead class="bg-success text-white">
+                <tr><th class="text-center">Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
+            </thead>
+            <tbody>
+                <!-- Event data here -->
+            </tbody>
+        </table>
+        <!-- use AJAX to navigate -->
+        <div class="row mb-3">
+            <div class="col">
+                <button disabled id="first" class="btn btn-outline-secondary" type="button"><i class="fas fa-angle-double-left"></i><span class="d-none d-md-inline"> First</span></button>
+                <button disabled id="prev" class="btn btn-outline-secondary" type="button"><i class="fas fa-angle-left"></i><span class="d-none d-md-inline"> Prev</span></button>
+            </div>
+            <div class="col text-center text-secondary">
+                <span id="start">##</span>-<span id="end">##</span>
+                of
+                <span id="total">##</span>
+            </div>
+            <div class="col text-right">
+                <button disabled id="next" class="btn btn-outline-secondary" type="button"><span class="d-none d-md-inline">Next </span><i class="fas fa-angle-right"></i></button>
+                <button disabled id="last" class="btn btn-outline-secondary"><span class="d-none d-md-inline">Last </span><i class="fas fa-angle-double-right"></i></button>
+            </div>
+        </div>
+    </div>
+
     <!-- jQuery framework -->
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- bootstrap -->
