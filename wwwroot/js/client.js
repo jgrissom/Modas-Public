@@ -55,6 +55,23 @@ $(function () {
         getEvents($(this).data('page'));
     });
 
+    // event listener to toggle data auto-refresh
+    $('#auto-refresh').on('click', function () {
+        $(this).data('val', !($(this).data('val')));
+        initAutoRefresh();
+    });
+
+    function initAutoRefresh(){
+        // if auto-refresh button is set to true
+        if ($('#auto-refresh').data('val')) {
+            // display checked icon
+            $('#auto-refresh i').removeClass('fa-square').addClass('fa-check-square');
+        } else {
+            // display unchecked icon
+            $('#auto-refresh i').removeClass('fa-check-square').addClass('fa-square');
+        }
+    }
+
     function toast(header, text, icon){
         // create unique id for toast using array length
         var id = toasts.length;
