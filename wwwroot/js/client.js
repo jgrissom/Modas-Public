@@ -1,7 +1,12 @@
 ﻿// Turn off ESLint (Windows): Tools - Options - Text Editor - Javascript - Linting
 $(function () {
     var toasts = [];
+    var refreshInterval;
     getEvents(1);
+
+    function refreshEvents(){
+        console.log($('#current').data('val'));
+    }
 
     function getEvents(page) {
         $.getJSON({
@@ -66,9 +71,15 @@ $(function () {
         if ($('#auto-refresh').data('val')) {
             // display checked icon
             $('#auto-refresh i').removeClass('fa-square').addClass('fa-check-square');
+            // start timer
+            refreshInterval = setInterval(refreshEvents, 2000);
         } else {
             // display unchecked icon
             $('#auto-refresh i').removeClass('fa-check-square').addClass('fa-square');
+            // if the timer is on, clear it
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
         }
     }
 
@@ -123,6 +134,7 @@ $(function () {
         $('#next').data('page', p.nextPage);
         $('#prev').data('page', p.previousPage);
         $('#last').data('page', p.totalPages);
+        $('#current').data('val', p.currentPage);
     }
 
     function initButtons() {
