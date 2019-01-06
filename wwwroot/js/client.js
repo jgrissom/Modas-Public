@@ -1,6 +1,6 @@
 ﻿// Turn off ESLint (Windows): Tools - Options - Text Editor - Javascript - Linting
 $(function () {
-    getEvents(1)
+    getEvents(1);
 
     function getEvents(page) {
         $.getJSON({
@@ -13,10 +13,39 @@ $(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 // log the error to the console
-                console.log("The following error occured: " + textStatus, errorThrown);
+                console.log("The following error occured: " + jqXHR.status, errorThrown);
             }
         });
     }
+
+    // delegated event handler needed
+    // http://api.jquery.com/on/#direct-and-delegated-events
+    $('tbody').on('click', '.flag', function () {
+        var checked;
+        if ($(this).data('checked')) {
+            $(this).data('checked', false);
+            $(this).removeClass('fas').addClass('far');
+            checked = false;
+        } else {
+            $(this).data('checked', true);
+            $(this).removeClass('far').addClass('fas');
+            checked = true;
+        }
+        // AJAX to update database
+        $.ajax({
+            headers: { "Content-Type": "application/json" },
+            url: "../api/event/" + $(this).data('id'),
+            type: 'patch',
+            data: JSON.stringify([{ "op": "replace", "path": "Flagged", "value": checked }]),
+            success: function () {
+                console.log("success");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // log the error to the console
+                console.log("The following error occured: " + jqXHR.status, errorThrown);
+            }
+        });
+    });
 
     // event listeners for first/next/prev/last buttons
     $('#next, #prev, #first, #last').on('click', function () {
