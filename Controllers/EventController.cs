@@ -20,6 +20,10 @@ namespace Modas.Controllers
         public IEnumerable<Event> Get() => repository.Events
             .Include(e => e.Location);
 
+        [HttpGet]
+        [Route("count")]
+        public int GetCount() => repository.Events.Count();
+
         [HttpGet("page{page:int}")]
         // returns all events by page
         public ApiListViewModel GetPage(int page = 1) =>
