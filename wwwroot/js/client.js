@@ -5,7 +5,7 @@ $(function () {
     getEvents(1);
 
     function refreshEvents(){
-        console.log($('#current').data('val'));
+        getEvents($('#current').data('val'));;
     }
 
     function getEvents(page) {
