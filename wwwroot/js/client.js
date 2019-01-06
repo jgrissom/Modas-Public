@@ -39,6 +39,7 @@ $(function () {
             data: JSON.stringify([{ "op": "replace", "path": "Flagged", "value": checked }]),
             success: function () {
                 console.log("success");
+                $('#myToast').toast('show');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 // log the error to the console
