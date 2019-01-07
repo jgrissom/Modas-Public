@@ -78,6 +78,27 @@ $(function () {
         });
     });
 
+    $('#submitButton').on('click', function(e){
+        e.preventDefault();
+
+        // verify username and password using the token api
+        $.ajax({
+            headers: { 'Content-Type': 'application/json' },
+            url: "../api/token",
+            type: 'post',
+            data: JSON.stringify({ "username": $('#username').val(), "password": $('#password').val() }),
+            success: function (data) {
+                console.log(data["token"]);
+                // hide modal
+                $('#signInModal').modal('hide');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                    // log the error to the console
+                    console.log("The following error occured: " + jqXHR.status, errorThrown);
+            }
+        });
+    });
+
     // event listeners for first/next/prev/last buttons
     $('#next, #prev, #first, #last').on('click', function () {
         getEvents($(this).data('page'));
