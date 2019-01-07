@@ -171,6 +171,11 @@ $(function () {
             // apply bootstrap is-invalid class to any field with errors
             errors[i].addClass('is-invalid');;
         }
+        // shake modal for effect
+        $('#signInModal').css('animation-duration', '0.7s')
+        $('#signInModal').addClass('animated shake').on('animationend', function () {
+            $(this).removeClass('animated shake');
+        });
     }
 
     function initAutoRefresh(){
