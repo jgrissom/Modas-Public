@@ -9,19 +9,19 @@ using Modas.Models.ViewModels;
 
 namespace Modas.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]"), Authorize]
     public class EventController : Controller
     {
         private readonly int PageSize = 20;
         private IEventRepository repository;
         public EventController(IEventRepository repo) => repository = repo;
 
-        [HttpGet, Authorize]
+        [HttpGet]
         // returns all events (unsorted)
         public IEnumerable<Event> Get() => repository.Events
             .Include(e => e.Location);
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         [Route("count")]
         public int GetCount() => repository.Events.Count();
 
