@@ -8,7 +8,13 @@ $(function () {
     function verifyToken() {
         // check for existing token
         var token = Cookies.get('token');
-        alert(token);
+        if (token){
+            // user has token
+            getEvents(1);
+        } else {
+            // display modal
+            $('#signInModal').modal();
+        }
     }
 
     function refreshEvents() {
@@ -33,14 +39,21 @@ $(function () {
 
     function getEvents(page) {
         $.getJSON({
+            headers: { "Authorization": 'Bearer ' + Cookies.get('token') },
             url: "../api/event/page" + page,
             success: function (response, textStatus, jqXhr) {
                 //console.log(response);
                 showTableBody(response.events);
                 showPagingInfo(response.pagingInfo);
                 initButtons();
+                // Show content
+                $('#content').show();
             },
             error: function (jqXHR, textStatus, errorThrown) {
+                // check for 401 - Unauthorized
+                if (jqXHR.status == 401){
+                    console.log("token expired");
+                }
                 // log the error to the console
                 console.log("The following error occured: " + jqXHR.status, errorThrown);
             }
