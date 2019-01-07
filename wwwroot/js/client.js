@@ -41,6 +41,12 @@ $(function () {
         });
     }
 
+    $('#signIn a').on('click', function(e){
+        e.preventDefault();
+        // display modal
+        $('#signInModal').modal();
+    });
+
     // delegated event handler needed
     // http://api.jquery.com/on/#direct-and-delegated-events
     $('tbody').on('click', '.flag', function () {
