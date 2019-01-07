@@ -1,4 +1,8 @@
 ﻿{
+  "Jwt": {
+    "Key": "veryVerySecretKey",
+    "Issuer": "http://localhost:5000/"
+  },
   "Data": {
     "Modas": {
       "ConnectionString": "Server=bitsql.wctc.edu;Database=XXX;User ID=YYY;Password=ZZZ"

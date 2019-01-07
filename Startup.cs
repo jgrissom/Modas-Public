@@ -4,6 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Modas.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Modas
 {
@@ -11,7 +14,8 @@ namespace Modas
     {
         // this exposes the connection string in appsettings.json
         public IConfiguration Configuration { get; }
-        public Startup(IConfiguration configuration){
+        public Startup(IConfiguration configuration)
+        {
             Configuration = configuration;
         }
 
@@ -21,6 +25,21 @@ namespace Modas
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:Modas:ConnectionString"]));
             services.AddTransient<IEventRepository, EFEventRepository>();
+            // Register JWT authentication schema / configure default JWT options
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
             services.AddMvc();
         }
 
@@ -32,6 +51,8 @@ namespace Modas
                 app.UseDeveloperExceptionPage();
             }
 
+            // Make the authentication service available to the application (Order matters here)
+            app.UseAuthentication();
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
