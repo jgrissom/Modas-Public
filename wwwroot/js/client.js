@@ -3,7 +3,13 @@ $(function () {
     var toasts = [];
     var refreshInterval;
     var snd = new Audio("../bell.wav"); // buffers automatically when created
-    getEvents(1);
+    verifyToken()
+
+    function verifyToken() {
+        // check for existing token
+        var token = Cookies.get('token');
+        alert(token);
+    }
 
     function refreshEvents() {
         $.getJSON({
@@ -88,9 +94,11 @@ $(function () {
             type: 'post',
             data: JSON.stringify({ "username": $('#username').val(), "password": $('#password').val() }),
             success: function (data) {
-                console.log(data["token"]);
+                // save token in a cookie
+                Cookies.set('token', data["token"], { expires: 7 });
                 // hide modal
                 $('#signInModal').modal('hide');
+                verifyToken();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                     // log the error to the console
