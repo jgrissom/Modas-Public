@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <title>MODAS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet" />
     <!-- font awesome -->
@@ -38,8 +39,8 @@
             </li>
         </ul>
         <button disabled id="auto-refresh" type="button" class="btn btn-primary" data-val="false">
-            <i class="far fa-square"></i> Auto Refresh
-        </button>
+            <i class="far fa-square"></i><span class="d-none d-sm-inline"> Auto Refresh</span>
+</button>
     </nav>
     <!-- content -->
     <div class="container" id="content" style="display:none;margin-top:65px;">
@@ -83,11 +84,11 @@
                     <form>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="Username">
+                            <input type="text" class="form-control" id="username" placeholder="Username" autocorrect="off" autocapitalize="none">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password">
+                            <input type="password" class="form-control" id="password" placeholder="Password" autocorrect="off" autocapitalize="none">
                         </div>
                     </form>
                 </div>
