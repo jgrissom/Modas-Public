@@ -8,32 +8,33 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <!-- font awesome -->
     <link rel="stylesheet" href="css/all.min.css" />
-    <link href="css/client.css" rel="stylesheet" />
     <!-- animate.css -->
     <link href="css/animate.base.css" rel="stylesheet" />
     <link href="css/shake.css" rel="stylesheet" />
+    <!-- custom css -->
+    <link href="css/client.css" rel="stylesheet" />
 </head>
 <body>
     <!-- toasts -->
-    <div role="alert" aria-live="assertive" aria-atomic="true" style="position:fixed;top:65px;right:10px;min-height:200px;">
-        <div style="position:absolute;top:0;right:0;" id="toast_container">
+    <div id="toaster" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="toast_container">
             <!-- toast container -->
 
         </div>
     </div>
     <!-- navbar -->
-    <nav class="navbar fixed-top navbar-light" style="background-color:#dedede;">
+    <nav class="navbar fixed-top navbar-light">
         <div class="navbar-brand">
             <i class="fas fa-shield-alt"></i>
             <span class="d-inline d-md-none">MODAS</span>
-            <span class="d-none d-md-inline" style="font-variant:small-caps;">Moving Object Detection Alert System</span>
+            <span class="d-none d-md-inline" id="modas_long">Moving Object Detection Alert System</span>
         </div>
-        <ul class="navbar-nav ml-auto mx-5" id="signIn" style="display:none;">
+        <ul class="navbar-nav ml-auto mx-5" id="signIn">
             <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fas fa-sign-in-alt"></i> Sign In</a>
             </li>
         </ul>
-        <ul class="navbar-nav ml-auto mx-5" id="signOut" style="display:none;">
+        <ul class="navbar-nav ml-auto mx-5" id="signOut">
             <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
             </li>
@@ -43,7 +44,7 @@
 </button>
     </nav>
     <!-- content -->
-    <div class="container" id="content" style="display:none;margin-top:65px;">
+    <div class="container" id="content">
         <table class="table table-sm table-striped table-shadow">
             <thead class="bg-success text-white">
                 <tr><th class="text-center">Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>

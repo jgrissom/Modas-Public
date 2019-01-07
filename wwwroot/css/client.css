@@ -13,3 +13,33 @@
     opacity: 0.7;
     margin: 2px 0 0 2px;
 }
+
+.navbar {
+    background-color:#dedede;
+}
+
+#toaster {
+    position:fixed;
+    top:65px;
+    right:10px;
+    min-height:200px;
+}
+
+#toast_container {
+    position:absolute;
+    top:0;
+    right:0;
+}
+
+#signIn, #signOut {
+    display: none;
+}
+
+#content {
+    display:none;
+    margin-top:65px;
+}
+
+#modas_long {
+    font-variant:small-caps;
+}
