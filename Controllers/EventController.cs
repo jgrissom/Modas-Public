@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,7 @@ namespace Modas.Controllers
         private IEventRepository repository;
         public EventController(IEventRepository repo) => repository = repo;
 
-        [HttpGet]
+        [HttpGet, Authorize]
         // returns all events (unsorted)
         public IEnumerable<Event> Get() => repository.Events
             .Include(e => e.Location);
