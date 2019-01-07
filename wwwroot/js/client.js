@@ -184,6 +184,14 @@ $(function () {
         initAutoRefresh();
     });
 
+    // simulates a submit button click when enter key is pressed in Modal
+    $('#signInModal').on('keypress', function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            $('#submitButton').click();
+        }
+    });
+
     function showErrors(errors){
         for (var i = 0; i < errors.length; i++){
             // apply bootstrap is-invalid class to any field with errors
