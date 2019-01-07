@@ -11,7 +11,13 @@ $(function () {
         if (token){
             // user has token
             getEvents(1);
+            // hide sign in link, show sign out link
+            $('#signIn').hide();
+            $('#signOut').show();
         } else {
+            // show sign in link, hide sign out link
+            $('#signIn').show();
+            $('#signOut').hide();
             // display modal
             $('#signInModal').modal();
         }
@@ -64,6 +70,19 @@ $(function () {
         e.preventDefault();
         // display modal
         $('#signInModal').modal();
+    });
+
+    $('#signOut a').on('click', function(e){
+        e.preventDefault();
+        // delete cookie
+        Cookies.remove('token');
+        // delete html from table body
+        $('tbody').html("");
+        // hide content
+        $('#content').hide();
+        // hide sign out link, show sign in link
+        $('#signIn').show();
+        $('#signOut').hide();
     });
 
     // delegated event handler needed
