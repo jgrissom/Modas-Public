@@ -114,7 +114,7 @@ $(function () {
         }
         // AJAX to update database
         $.ajax({
-            headers: { "Content-Type": "application/json" },
+            headers: { "Authorization": 'Bearer ' + Cookies.get("token"), 'Content-Type': 'application/json' },
             url: "../api/event/" + $(this).data('id'),
             type: 'patch',
             data: JSON.stringify([{ "op": "replace", "path": "Flagged", "value": checked }]),
