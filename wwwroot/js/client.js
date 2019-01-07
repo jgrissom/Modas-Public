@@ -166,8 +166,16 @@ $(function () {
                     verifyToken();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    // log the error to the console
-                    console.log("The following error occured: " + jqXHR.status, errorThrown);
+                    // check for 401 Unauthorized
+                    if (jqXHR.status == 401){
+                        // username and/or password not valid, display errors
+                        errors.push($('#username'));
+                        errors.push($('#password'));
+                        showErrors(errors);
+                    } else {
+                        // log the error to the console
+                        console.log("The following error occured: " + jqXHR.status, errorThrown);
+                    }
                 }
             });
         }
