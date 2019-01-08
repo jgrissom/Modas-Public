@@ -1,7 +1,6 @@
 ﻿{
   "Jwt": {
-    "Key": "veryVerySecretKey",
-    "Issuer": "http://localhost:5000/"
+    "Key": "veryVerySecretKey"
   },
   "Data": {
     "Modas": {

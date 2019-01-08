@@ -44,8 +44,6 @@ namespace Modas.Controllers
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-              _config["Jwt:Issuer"],
-              _config["Jwt:Issuer"],
               expires: DateTime.Now.AddDays(7),
               signingCredentials: creds);
 
