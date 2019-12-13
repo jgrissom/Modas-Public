@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace Modas
 {
@@ -25,6 +26,8 @@ namespace Modas
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:Modas:ConnectionString"]));
             services.AddTransient<IEventRepository, EFEventRepository>();
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:ModasIdentity:ConnectionString"]));
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
             // Register JWT authentication schema / configure default JWT options
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

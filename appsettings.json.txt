@@ -1,10 +1,15 @@
 ﻿{
   "Jwt": {
-    "Key": "veryVerySecretKey"
+    "Key": "veryVerySecretKey",
+    "ValidFor":  7,
+    "Role": "Modas"
   },
   "Data": {
     "Modas": {
       "ConnectionString": "Server=bitsql.wctc.edu;Database=XXX;User ID=YYY;Password=ZZZ"
+    },
+    "ModasIdentity": {
+      "ConnectionString": "Server=bitsql.wctc.edu;Database=XXXIdentity;User ID=YYY;Password=ZZZ"
     }
   }
 }

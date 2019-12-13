@@ -166,12 +166,18 @@ $(function () {
                     verifyToken();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    // check for 401 Unauthorized
+                    // check for 401 Unauthorized / 403 Forbidden
                     if (jqXHR.status == 401){
                         // username and/or password not valid, display errors
                         errors.push($('#username'));
                         errors.push($('#password'));
                         showErrors(errors);
+                    } else if (jqXHR.status == 403){
+                        // user is not in the Modas role
+                        // hide modal
+                        $('#signInModal').modal('hide');
+                        // show toast
+                        toast("Forbidden", "You are not authorized to view this content", "fas fa-lock")
                     } else {
                         // log the error to the console
                         console.log("The following error occured: " + jqXHR.status, errorThrown);
